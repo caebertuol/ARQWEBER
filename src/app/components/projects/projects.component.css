@@ -1,0 +1,8 @@
+.project-hover:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-overlay {
+    transition: opacity 0.3s ease;
+    background: rgba(139, 120, 109, 0.8);
+}

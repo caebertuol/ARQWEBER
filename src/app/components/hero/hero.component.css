@@ -1,0 +1,51 @@
+/* O container principal precisa de position: relative para que os elementos
+   absolutos internos fiquem contidos nele. */
+.hero-container {
+  position: relative;
+  overflow: hidden; /* Garante que nada vaze para fora */
+}
+
+/* O container das imagens do carrossel */
+.carousel-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Fica no fundo */
+}
+
+/* Cada slide individual do carrossel */
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* Por padrão, todas as imagens são invisíveis */
+  transition: opacity 1.5s ease-in-out; /* A mágica da transição suave! */
+}
+
+/* A imagem que estiver com a classe .active se tornará visível */
+.carousel-slide.active {
+  opacity: 1;
+}
+
+/* O overlay escuro para dar contraste ao texto */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2; /* Fica acima das imagens */
+}
+
+/* O conteúdo de texto fica na camada de cima */
+.hero-content {
+  position: relative;
+  z-index: 3; /* Fica acima de tudo */
+}
