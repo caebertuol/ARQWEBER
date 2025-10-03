@@ -1,0 +1,24 @@
+@if (notification$ | async; as notification) {
+  <div 
+    class="fixed top-5 right-5 z-50 text-white py-3 px-5 rounded-lg shadow-xl flex items-center animate-fade-in-down"
+    [ngClass]="{
+       'bg-primary': notification.type === 'success',
+    'bg-red-700': notification.type === 'error',
+    'bg-amber-500': notification.type === 'warning'
+  }">
+
+    <div class="mr-3">
+      @switch (notification.type) {
+        @case ('success') { <i-feather name="check-circle"></i-feather> }
+        @case ('error') { <i-feather name="x-circle"></i-feather> }
+        @case ('warning') { <i-feather name="alert-triangle"></i-feather> }
+      }
+    </div>
+    
+    <span>{{ notification.message }}</span>
+
+    <button (click)="closeNotification()" class="ml-4 text-white hover:bg-white/20 rounded-full p-1">
+      <i-feather name="x" class="w-4 h-4"></i-feather>
+    </button>
+  </div>
+}

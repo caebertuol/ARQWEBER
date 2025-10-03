@@ -2,10 +2,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FeatherModule } from 'angular-feather';
-// Importe apenas os componentes do 'casco'
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { NotificationComponent } from './components/notification/notification.component'; 
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,9 @@ import { FooterComponent } from './components/footer/footer.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    FeatherModule
+    FeatherModule,
+    NotificationComponent
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
