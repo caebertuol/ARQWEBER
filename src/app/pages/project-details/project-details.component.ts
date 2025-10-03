@@ -1,30 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necessário para ngFor, ngIf
-import { RouterModule } from '@angular/router'; // Necessário para routerLink
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'; // Adicione Router para redirecionamento
+import { CommonModule } from '@angular/common';
+import { FeatherModule } from 'angular-feather';
 
-// 1. Definição da interface Project (opcional, mas boa prática para tipagem)
+
+// Copie a interface Project de projects.component.ts para cá
 interface Project {
   id: number;
   title: string;
   location: string;
   imageUrl: string;
-  fullDescription: string; // Nova propriedade para a página de detalhes
-  client?: string; // Opcional
-  year?: number; // Opcional
-  category: 'residencial' | 'comercial' | 'institucional'; // Exemplo de categoria
-  images?: string[]; // Para ter mais imagens nos detalhes
+  fullDescription: string;
+  client?: string;
+  year?: number;
+  category: 'residencial' | 'comercial' | 'institucional';
+  images?: string[];
 }
 
 @Component({
-  selector: 'app-projects',
+  selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule, RouterModule], // Adicione RouterModule
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  imports: [CommonModule, RouterModule, FeatherModule], // Adicione RouterModule para o botão voltar
+  templateUrl: './project-details.component.html',
+  styleUrls: ['./project-details.component.css']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectDetailsComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router); // Injetar o Router
 
-  // 2. Lista COMPLETA de todos os projetos
+  project: Project | undefined; // O projeto a ser exibido
+
+  // IMPORTANTE: Esta é uma cópia **temporária** da lista de projetos.
+  // Em uma aplicação real, você faria uma requisição para um serviço/API.
   allProjects: Project[] = [
     {
       id: 1,
@@ -59,7 +66,6 @@ export class ProjectsComponent implements OnInit {
       category: 'comercial',
       images: ['http://static.photos/restaurant/640x360/4', 'https://picsum.photos/id/1083/800/600', 'https://picsum.photos/id/1084/800/600']
     },
-    // Novos projetos que serão mostrados ao clicar em "Ver todos"
     {
       id: 4,
       title: 'Clínica Odontológica',
@@ -95,27 +101,16 @@ export class ProjectsComponent implements OnInit {
     }
   ];
 
-  // 3. Projetos atualmente visíveis na tela
-  visibleProjects: Project[] = [];
-  initialProjectsCount: number = 3; // Quantos projetos mostrar inicialmente
-  showAllProjects: boolean = false; // Flag para controlar se todos estão visíveis
 
   ngOnInit(): void {
-    this.loadInitialProjects();
-  }
-
-  // 4. Carrega os projetos iniciais
-  loadInitialProjects(): void {
-    this.visibleProjects = this.allProjects.slice(0, this.initialProjectsCount);
-  }
-
-  // 5. Alterna entre mostrar todos os projetos ou apenas os iniciais
-  toggleShowAllProjects(): void {
-    this.showAllProjects = !this.showAllProjects;
-    if (this.showAllProjects) {
-      this.visibleProjects = this.allProjects;
-    } else {
-      this.loadInitialProjects();
-    }
+    this.route.paramMap.subscribe(params => {
+      const projectId = params.get('id');
+      if (projectId) {
+        this.project = this.allProjects.find(p => p.id === +projectId); // O '+' converte string para number
+        if (!this.project) {
+          this.router.navigate(['/']); // Redireciona para a home se o projeto não for encontrado
+        }
+      }
+    });
   }
 }

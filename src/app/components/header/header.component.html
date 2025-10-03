@@ -1,16 +1,31 @@
- <!-- Navigation -->
-    <nav class="fixed w-full bg-white shadow-md z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-primary">ARQ WEBER</div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-primary hover:text-secondary">Home</a>
-                <a href="#sobre" class="text-gray-600 hover:text-primary">Sobre</a>
-                <a href="#projetos" class="text-gray-600 hover:text-primary">Projetos</a>
-                <a href="#servicos" class="text-gray-600 hover:text-primary">Serviços</a>
-                <a href="#contato" class="text-gray-600 hover:text-primary">Contato</a>
-            </div>
-            <button class="md:hidden focus:outline-none">
-                <i data-feather="menu"></i>
-            </button>
+<nav class="fixed w-full bg-white shadow-md z-50">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a routerLink="/" class="text-2xl font-bold text-primary">ARQ WEBER</a>
+    
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="/#home" class="text-primary hover:text-secondary">Home</a>
+      <a href="/#sobre" class="text-gray-600 hover:text-primary">Sobre</a>
+      <a href="/#projetos" class="text-gray-600 hover:text-primary">Projetos</a>
+      <a href="/#servicos" class="text-gray-600 hover:text-primary">Serviços</a>
+      <a href="/#contato" class="text-gray-600 hover:text-primary">Contato</a>
+
+      <div class="border-l border-gray-300 h-6"></div>
+
+      @if (currentUser$ | async; as user) {
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-700">Olá, {{ user.name }}</span>
+          <button (click)="logout()" class="text-primary hover:underline font-medium">Sair</button>
         </div>
-    </nav>
+      } @else {
+        <div class="flex items-center space-x-4">
+          <a routerLink="/login" class="text-primary hover:underline font-medium">Login</a>
+          <a routerLink="/registro" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition">Registrar</a>
+        </div>
+      }
+    </div>
+    
+    <button class="md:hidden focus:outline-none">
+      <i data-feather="menu"></i>
+    </button>
+  </div>
+</nav>

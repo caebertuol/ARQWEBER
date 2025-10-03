@@ -1,32 +1,29 @@
- <!-- Services Section -->
-    <div id="servicos" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-16 text-center text-primary">Serviços</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+<section id="servicos" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold mb-16 text-center text-primary">Serviços</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @for (service of availableServices; track service.title) {
+                <div
+                    (click)="toggleServiceSelection(service)"
+                    class="bg-white p-8 rounded-lg shadow-md text-center cursor-pointer transition-transform transform hover:scale-105"
+                    [ngClass]="{'border-4 border-primary ring-2 ring-primary/50': (isSelected(service) | async)}">
+
                     <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-feather="home" class="text-primary w-8 h-8"></i>
+                        <i-feather [name]="service.icon" class="text-primary w-8 h-8"></i-feather>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-primary">Projeto Residencial</h3>
-                    <p class="text-gray-600">Criação de espaços personalizados que refletem seu estilo de vida e necessidades familiares.</p>
+                    <h3 class="text-xl font-bold mb-4 text-primary">{{ service.title }}</h3>
+                    <p class="text-gray-600">{{ service.description }}</p>
                 </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-feather="briefcase" class="text-primary w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-primary">Projeto Comercial</h3>
-                    <p class="text-gray-600">Ambientes profissionais que combinam funcionalidade e identidade da marca.</p>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i data-feather="edit" class="text-primary w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 text-primary">Consultoria</h3>
-                    <p class="text-gray-600">Orientação especializada para otimizar espaços existentes ou planejar novas construções.</p>
-                </div>
-            </div>
+            }
+        </div>
+
+        <div class="text-center mt-16">
+            <button
+                (click)="proceedToQuote()"
+                class="bg-primary hover:bg-secondary text-white font-bold px-10 py-4 rounded-md transition duration-300 text-lg">
+                Solicitar Orçamento
+            </button>
         </div>
     </div>
-
+</section>
