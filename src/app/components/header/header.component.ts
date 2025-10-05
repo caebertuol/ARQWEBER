@@ -1,29 +1,50 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService, User } from '../../services/auth.service'; // 1. Importe o AuthService e a interface User
+import { AuthService, User } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { FeatherModule } from 'angular-feather';
+import { ThemeService, Theme } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FeatherModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  // 2. Injeta o AuthService
   private authService = inject(AuthService);
-
-  // 3. Cria uma propriedade para "observar" o usuário logado em tempo real
+  private themeService = inject(ThemeService);
+  
   currentUser$: Observable<User | null>;
+  currentTheme$: Observable<Theme>;
+
+  // 1. NOVA PROPRIEDADE PARA O MENU MOBILE
+  isMobileMenuOpen = false;
+
+  navLinks = [
+    { path: '/#home', label: 'Home' },
+    { path: '/#sobre', label: 'Sobre' },
+    { path: '/#projetos', label: 'Projetos' },
+    { path: '/#servicos', label: 'Serviços' },
+    { path: '/#contato', label: 'Contato' }
+  ];
 
   constructor() {
-    // Atribui o Observable do serviço à nossa propriedade local
     this.currentUser$ = this.authService.currentUser$;
+    this.currentTheme$ = this.themeService.theme$;
+  }
+  
+  // 2. NOVA FUNÇÃO PARA ABRIR/FECHAR O MENU MOBILE
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  // 4. Cria uma função de logout que chama o serviço
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
   logout(): void {
     this.authService.logout();
   }

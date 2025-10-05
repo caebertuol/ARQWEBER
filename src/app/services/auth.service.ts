@@ -64,7 +64,7 @@ export class AuthService {
           
           this.notificationService.show('Olá, ' + data.user.name + '! Que bom te ver por aqui.');
           
-          this.router.navigate(['/']);
+          this.router.navigate(['/'], { fragment: 'servicos' });
           return true;
         }
       }

@@ -6,6 +6,7 @@ export interface ServiceItem {
   title: string;
   description: string;
   icon: string; // Nome do ícone do Feather
+  price: number;
 }
 
 @Injectable({

@@ -1,28 +1,60 @@
-<section id="servicos" class="py-20 bg-gray-50">
+<section id="servicos" class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-16 text-center text-primary">Serviços</h2>
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary dark:text-secondary">Serviços</h2>
+
+        <div class="max-w-3xl mx-auto text-center text-gray-600 dark:text-gray-400 mb-16">
+          @if (isLoggedIn$ | async) {
+            <p>
+              Escolha os serviços desejados e comece a dar vida ao seu projeto.
+            </p>
+          } @else {
+            <p>
+             Conheça nossas soluções em arquitetura e design. Para montar seu orçamento personalizado, basta <a routerLink="/login" class="text-primary dark:text-secondary font-bold hover:underline">acessar na sua conta</a> ou <a routerLink="/registro" class="text-primary dark:text-secondary font-bold hover:underline">se cadastrar.</a>
+              
+            </p>
+          }
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @for (service of availableServices; track service.title) {
                 <div
                     (click)="toggleServiceSelection(service)"
-                    class="bg-white p-8 rounded-lg shadow-md text-center cursor-pointer transition-transform transform hover:scale-105"
+                    class="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md text-center cursor-pointer transition-all duration-300 transform hover:scale-105 flex flex-col"
                     [ngClass]="{'border-4 border-primary ring-2 ring-primary/50': (isSelected(service) | async)}">
 
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i-feather [name]="service.icon" class="text-primary w-8 h-8"></i-feather>
+                    <div>
+                        <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i-feather [name]="service.icon" class="text-primary w-8 h-8"></i-feather>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-primary dark:text-white">{{ service.title }}</h3>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 text-primary">{{ service.title }}</h3>
-                    <p class="text-gray-600">{{ service.description }}</p>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 flex-grow">{{ service.description }}</p>
+                    
+                    <p class="font-playfair text-xl font-semibold text-primary dark:text-secondary mt-6">
+                      {{ service.price | currency:'BRL' }}
+                    </p>
                 </div>
             }
         </div>
 
-        <div class="text-center mt-16">
+        @if (selectedServices$ | async; as services) {
+          @if (services.length > 0) {
+            <div class="mt-16 bg-white dark:bg-gray-700 max-w-2xl mx-auto p-6 rounded-lg shadow-lg text-center">
+              <h3 class="text-2xl font-bold text-primary dark:text-white mb-4">Resumo do Orçamento</h3>
+              <p class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                Total: {{ totalPrice$ | async | currency:'BRL' }}
+              </p>
+            </div>
+          }
+        }
+
+        <div class="text-center mt-12">
             <button
                 (click)="proceedToQuote()"
-                class="bg-primary hover:bg-secondary text-white font-bold px-10 py-4 rounded-md transition duration-300 text-lg">
-                Solicitar Orçamento
+                class="bg-primary hover:bg-opacity-80 dark:hover:bg-opacity-100 text-white font-bold px-10 py-4 rounded-md transition duration-300 text-lg">
+                <i-feather name="send" class="inline-block mr-2 -mt-1"></i-feather>
+                Iniciar Agendamento
             </button>
         </div>
     </div>
