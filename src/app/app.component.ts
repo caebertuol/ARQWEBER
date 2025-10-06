@@ -14,13 +14,13 @@ import { NotificationComponent } from './components/notification/notification.co
     HeaderComponent,
     FooterComponent,
     FeatherModule,
-    NotificationComponent
-
+    NotificationComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'portfolio-arquiteta';
+ 
   
 }

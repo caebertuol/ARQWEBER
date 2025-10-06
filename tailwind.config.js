@@ -11,7 +11,7 @@ module.exports = {
         secondary: '#D9C7B8',
       },
       fontFamily: {
-        'playfair': ['"Playfair Display"', 'serif'],
+        'playfair': ['"Playfair Display SC"', 'serif'],
         'raleway': ['Raleway', 'sans-serif'],
       }
     },
