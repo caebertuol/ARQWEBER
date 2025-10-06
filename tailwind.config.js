@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#8B786D',
+        primary: '#A0522D',
         secondary: '#D9C7B8',
       },
       fontFamily: {
@@ -19,3 +19,10 @@ module.exports = {
   plugins: [],
 }
 
+
+ 
+/*  primary: '#A0522D',
+    secondary: '#008080', */
+
+    /*  primary: '#8B786D',
+        secondary: '#D9C7B8', */

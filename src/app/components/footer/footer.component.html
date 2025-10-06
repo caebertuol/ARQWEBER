@@ -1,37 +1,46 @@
-<footer class="bg-gray-900 text-white py-10">
+<footer class="bg-gray-900 text-gray-400 py-10">
   <div class="container mx-auto px-6">
-    <div class="flex flex-col md:flex-row justify-between items-center">
-      <div class="text-xl font-bold mb-4 md:mb-0">Estefânia Weber Arquitetura & Urbanismo
-        <span class="block text-sm font-normal mt-2">CAU A133572-3</span>
-        
 
+    <div class="flex flex-col md:flex-row justify-between items-center pb-8">
+      <div class="flex flex-wrap justify-center space-x-6 mb-6 md:mb-0">
+        @for (link of navLinks; track link.path) {
+          <a [href]="link.path" class="hover:text-white transition-colors">{{ link.label }}</a>
+        }
       </div>
 
       <div class="flex space-x-6">
         <a href="https://www.instagram.com/teweber/" 
-        target="_blank" rel="noopener noreferrer" 
-        class="hover:text-secondary transition"
-        aria-label="Perfil no Instagram">        
+           target="_blank" rel="noopener noreferrer" 
+           class="hover:text-white transition-colors"
+           aria-label="Perfil no Instagram">
           <i-feather name="instagram"></i-feather>
         </a>
-
         <a href="https://www.linkedin.com/in/estef%C3%A2niaweber/" 
-        target="_blank" rel="noopener noreferrer" 
-        class="hover:text-secondary transition"aria-label="Perfil no LinkedIn">
-        <i-feather name="linkedin"></i-feather>
+           target="_blank" rel="noopener noreferrer" 
+           class="hover:text-white transition-colors"
+           aria-label="Perfil no LinkedIn">
+          <i-feather name="linkedin"></i-feather>
         </a>
-
         <a href="https://www.facebook.com/estefaniaweber" 
-        target="_blank" rel="noopener noreferrer" 
-        class="hover:text-secondary transition"
-        aria-label="Perfil no Facebook">
+           target="_blank" rel="noopener noreferrer" 
+           class="hover:text-white transition-colors"
+           aria-label="Página no Facebook">
           <i-feather name="facebook"></i-feather>
-  
-</a>
+        </a>
       </div>
     </div>
-    <div class="border-t border-gray-800 mt-8 pt-8 text-center md:text-left">
-      <p>&copy; 2025 ARQ WEBER. Todos os direitos reservados.</p>
+
+    <div class="border-t border-gray-800"></div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center pt-8">
+      <p class="text-sm mb-4 md:mb-0">&copy; 2025 ARQ WEBER. Todos os direitos reservados.</p>
+
+      <div class="text-right">
+        <h3 class="text-lg font-bold text-white">Estefânia Weber</h3>
+        <p class="text-sm font-light">Arquitetura & Urbanismo</p>
+        <span class="text-xs text-gray-500 mt-1">CAU A133572-3</span>
+      </div>
     </div>
+
   </div>
 </footer>
