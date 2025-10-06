@@ -2,7 +2,7 @@
 module.exports = {
   darkMode: 'class',
   content: [
-    "./src/**/*.{html,ts}", // Isso faz o Tailwind 'ler' todos os seus componentes
+    "./src/**/*.{html,ts}", // lê todos os componentes
   ],
   theme: {
     extend: {

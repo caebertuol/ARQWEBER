@@ -1,4 +1,3 @@
-// Adicione inject, PLATFORM_ID, e isPlatformBrowser aos seus imports do Angular
 import { Component, OnInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common'; // Adicione isPlatformBrowser
 
@@ -11,7 +10,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common'; // Adicione i
 })
 export class HeroComponent implements OnInit, OnDestroy {
 
-  // 1. Injeta o PLATFORM_ID para identificar o ambiente (servidor ou navegador)
+
   private platformId = inject(PLATFORM_ID);
 
   images: string[] = [

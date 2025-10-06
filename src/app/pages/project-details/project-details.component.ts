@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router'; // Adicione Router para redirecionamento
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
 
 
-// Copie a interface Project de projects.component.ts para cá
+
 interface Project {
   id: number;
   title: string;
@@ -20,18 +20,18 @@ interface Project {
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, FeatherModule], // Adicione RouterModule para o botão voltar
+  imports: [CommonModule, RouterModule, FeatherModule],
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css']
 })
 export class ProjectDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private router = inject(Router); // Injetar o Router
+  private router = inject(Router);
 
-  project: Project | undefined; // O projeto a ser exibido
+  project: Project | undefined;
 
   // IMPORTANTE: Esta é uma cópia **temporária** da lista de projetos.
-  // Em uma aplicação real, você faria uma requisição para um serviço/API.
+  // Em uma aplicação real, será através de um serviço/API.
   allProjects: Project[] = [
     {
       id: 1,

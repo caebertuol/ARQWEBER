@@ -16,11 +16,10 @@ import { ThemeService, Theme } from '../../services/theme.service';
 export class HeaderComponent {
   private authService = inject(AuthService);
   private themeService = inject(ThemeService);
-  
+
   currentUser$: Observable<User | null>;
   currentTheme$: Observable<Theme>;
 
-  // 1. NOVA PROPRIEDADE PARA O MENU MOBILE
   isMobileMenuOpen = false;
 
   navLinks = [
@@ -35,8 +34,7 @@ export class HeaderComponent {
     this.currentUser$ = this.authService.currentUser$;
     this.currentTheme$ = this.themeService.theme$;
   }
-  
-  // 2. NOVA FUNÇÃO PARA ABRIR/FECHAR O MENU MOBILE
+
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }

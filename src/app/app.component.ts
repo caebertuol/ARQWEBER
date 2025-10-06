@@ -22,5 +22,5 @@ import { NotificationComponent } from './components/notification/notification.co
 })
 export class AppComponent {
   title = 'portfolio-arquiteta';
-  // TODA A LÓGICA DE 'isHomePage', ROUTER, ETC. FOI REMOVIDA
+  
 }

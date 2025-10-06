@@ -1,31 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necessário para ngFor, ngIf
-import { RouterModule } from '@angular/router'; // Necessário para routerLink
+import { CommonModule } from '@angular/common'; 
+import { RouterModule } from '@angular/router'; 
 
-// 1. Definição da interface Project (opcional, mas boa prática para tipagem)
+
 interface Project {
   id: number;
   title: string;
   location: string;
   imageUrl: string;
-  fullDescription: string; // Nova propriedade para a página de detalhes
-  client?: string; // Opcional
-  year?: number; // Opcional
-  category: 'residencial' | 'comercial' | 'institucional'; // Exemplo de categoria
-  images?: string[]; // Para ter mais imagens nos detalhes
+  fullDescription: string; 
+  client?: string; 
+  year?: number;
+  category: 'residencial' | 'comercial' | 'institucional';
+  images?: string[]; 
 }
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, RouterModule], // Adicione RouterModule
+  imports: [CommonModule, RouterModule], 
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
 
-  // 2. Lista COMPLETA de todos os projetos
-  allProjects: Project[] = [
+   allProjects: Project[] = [
     {
       id: 1,
       title: 'Residência Urbana',
@@ -95,7 +94,7 @@ export class ProjectsComponent implements OnInit {
     }
   ];
 
-  // 3. Projetos atualmente visíveis na tela
+  // Projetos atualmente visíveis na tela
   visibleProjects: Project[] = [];
   initialProjectsCount: number = 3; // Quantos projetos mostrar inicialmente
   showAllProjects: boolean = false; // Flag para controlar se todos estão visíveis
@@ -104,12 +103,12 @@ export class ProjectsComponent implements OnInit {
     this.loadInitialProjects();
   }
 
-  // 4. Carrega os projetos iniciais
+  // Carrega os projetos iniciais
   loadInitialProjects(): void {
     this.visibleProjects = this.allProjects.slice(0, this.initialProjectsCount);
   }
 
-  // 5. Alterna entre mostrar todos os projetos ou apenas os iniciais
+  // Alterna entre mostrar todos os projetos ou apenas os iniciais
   toggleShowAllProjects(): void {
     this.showAllProjects = !this.showAllProjects;
     if (this.showAllProjects) {

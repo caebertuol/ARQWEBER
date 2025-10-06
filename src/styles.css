@@ -5,15 +5,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos globais que estavam no HTML original */
+
 html {
-  scroll-behavior: smooth; /* Isso substitui o script de rolagem suave! */
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Playfair Display', serif;
 }

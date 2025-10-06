@@ -1,5 +1,3 @@
-// src/app/pages/register/register.component.ts
-
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -25,8 +23,8 @@ export class RegisterComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      // ADICIONE ESTA LINHA:
-      lgpdConsent: [false, Validators.requiredTrue] // Começa desmarcado e é obrigatório marcar (true)
+
+      lgpdConsent: [false, Validators.requiredTrue]
     });
   }
 
@@ -36,7 +34,7 @@ export class RegisterComponent {
       return;
     }
 
-    // A lógica de submit não precisa mudar, pois a validação já barra o processo se for inválido
+
     const { name, email, password } = this.registerForm.value;
     const success = this.authService.register(name, email, password);
 

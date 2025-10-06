@@ -1,7 +1,5 @@
 // src/app/pages/home/home.component.ts
 import { Component } from '@angular/core';
-
-// Importe todos os componentes de seção
 import { HeroComponent } from '../../components/hero/hero.component';
 import { AboutComponent } from '../../components/about/about.component';
 import { ProjectsComponent } from '../../components/projects/projects.component';

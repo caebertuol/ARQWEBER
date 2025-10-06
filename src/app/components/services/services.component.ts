@@ -1,9 +1,9 @@
-import { Component, inject, PLATFORM_ID  } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; // Para navegar para a página de orçamento
+import { Router, RouterModule } from '@angular/router';
 import { FeatherModule } from 'angular-feather';
-import { QuoteService, ServiceItem } from '../../services/quote.service'; // Importe o serviço e a interface
-import { AuthService } from '../../services/auth.service'; // Para verificar se o usuário está logado
+import { QuoteService, ServiceItem } from '../../services/quote.service';
+import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,22 +20,22 @@ export class ServicesComponent {
   private quoteService = inject(QuoteService);
   private authService = inject(AuthService);
   private router = inject(Router);
-   private platformId = inject(PLATFORM_ID); 
-    private notificationService = inject(NotificationService);
+  private platformId = inject(PLATFORM_ID);
+  private notificationService = inject(NotificationService);
 
-  // Lista de serviços disponíveis (agora definida aqui)
+
   availableServices: ServiceItem[] = [
     {
       title: 'Projeto Residencial',
       description: 'Criação de espaços personalizados que refletem seu estilo de vida e necessidades familiares.',
       icon: 'home',
-      price: 3650
+      price: 3500
     },
     {
       title: 'Projeto Comercial',
       description: 'Ambientes profissionais que combinam funcionalidade e identidade da marca.',
       icon: 'briefcase',
-      price: 5900
+      price: 5000
     },
     {
       title: 'Consultoria',
@@ -45,10 +45,10 @@ export class ServicesComponent {
     }
   ];
 
-  // Observable para saber quais serviços estão selecionados
+
   selectedServices$: Observable<ServiceItem[]>;
-  totalPrice$: Observable<number>; 
-   isLoggedIn$: Observable<boolean>;
+  totalPrice$: Observable<number>;
+  isLoggedIn$: Observable<boolean>;
 
   constructor() {
     this.selectedServices$ = this.quoteService.selectedServices$;
@@ -60,42 +60,34 @@ export class ServicesComponent {
     );
   }
 
-  // Função para verificar se um serviço está selecionado (para o estilo do card)
   isSelected(service: ServiceItem): Observable<boolean> {
     return this.selectedServices$.pipe(
       map(selected => selected.some(s => s.title === service.title))
     );
   }
 
-  // Função chamada ao clicar em um card
   toggleServiceSelection(service: ServiceItem): void {
     this.quoteService.toggleService(service);
   }
 
-  // Função para prosseguir para a página de orçamento
   proceedToQuote(): void {
     const currentUser = this.authService.currentUserValue;
     const selectedServices = this.quoteService.getSelectedServices();
-    
-    // Primeiro, verifica se o usuário está logado
+
     if (!currentUser) {
       this.router.navigate(['/login']);
-      // Usamos o notificationService que já criamos!
-      // this.notificationService.show('Por favor, faça o login para solicitar um orçamento.', 'warning');
       this.notificationService.show('Faça o login para solicitar um orçamento.', 'warning');
       return;
     }
 
-    // Depois, verifica se algum serviço foi selecionado
     if (selectedServices.length === 0) {
       this.notificationService.show('Por favor, selecione pelo menos um serviço.', 'warning');
       return;
     }
-    
-    // Se tudo estiver certo, preparamos a mensagem para o WhatsApp
+
     const totalPrice = selectedServices.reduce((total, service) => total + service.price, 0);
     const serviceList = selectedServices.map(s => `- ${s.title}`).join('\n');
-    const phoneNumber = '5554981160144'; // <-- SUBSTITUA PELO SEU NÚMERO DE WHATSAPP
+    const phoneNumber = '5554981160144';
 
     let message = `Olá! Meu nome é ${currentUser.name}.\n\n`;
     message += `Me interessei por esses serviços:\n`;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FeatherModule } from 'angular-feather'; 
-import { RouterModule } from '@angular/router'; // É bom ter para links internos
+import { RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-footer',

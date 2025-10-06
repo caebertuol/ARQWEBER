@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  // O Router já é injetado e usado dentro do authService.login()
+
 
   loginForm: FormGroup;
 
@@ -32,8 +32,8 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
-    
-    // Chama o método de login. O redirecionamento já é feito dentro do serviço.
+
+    // Chama o método de login. 
     this.authService.login(email, password);
   }
 }
