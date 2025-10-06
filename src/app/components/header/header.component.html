@@ -1,12 +1,11 @@
 <nav class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
   <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a routerLink="/" (click)="isMobileMenuOpen = false" class="text-3xl font-bold text-primary dark:text-white">ARQ
-      WEBER</a>
+    <a routerLink="/" (click)="isMobileMenuOpen = false" class="text-3xl font-bold text-primary dark:text-white">ARQ WEBER</a>
 
     <div class="hidden md:flex items-center space-x-6">
       @for(link of navLinks; track link.path) {
       <a [href]="link.path"
-        class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors">{{
+        class="uppercase font-playfair text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors">{{
         link.label }}</a>
       }
 
@@ -19,7 +18,7 @@
       </div>
       } @else {
       <div class="flex items-center">
-        <a routerLink="/login" class="text-primary dark:text-secondary hover:underline font-medium">Login</a>
+        <a routerLink="/login" class="font-playfair text-primary dark:text-secondary hover:underline font-medium">Login</a>
       </div>
       }
 
@@ -47,22 +46,32 @@
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       @for (link of navLinks; track link.path) {
       <a [href]="link.path" (click)="toggleMobileMenu()"
-        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700">{{
+        class="uppercase block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700">{{
         link.label }}</a>
       }
     </div>
     <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-      @if (currentUser$ | async; as user) {
       <div class="px-5 flex items-center justify-between">
-        <span class="font-medium text-gray-800 dark:text-gray-200">Olá, {{ user.name }}</span>
-        <button (click)="logout()" class="text-primary dark:text-secondary hover:underline font-medium">Sair</button>
-      </div>
-      } @else {
-      <div class="px-5">
+        @if (currentUser$ | async; as user) {
+        <div class="flex items-center">
+          <span class="font-medium text-gray-800 dark:text-gray-200">Olá, {{ user.name }}</span>
+        </div>
+        <button (click)="logout()"
+          class="text-primary dark:text-secondary hover:underline font-medium ml-4">Sair</button>
+        } @else {
         <a routerLink="/login" (click)="toggleMobileMenu()"
-          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-primary dark:text-secondary hover:bg-gray-50 dark:hover:bg-gray-700">Login</a>
+          class="block w-full text-left text-base font-medium text-primary dark:text-secondary">Login</a>
+        }
+
+        <button (click)="toggleTheme()"
+          class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+          @if ((currentTheme$ | async) === 'light') {
+          <i-feather name="moon"></i-feather>
+          } @else {
+          <i-feather name="sun"></i-feather>
+          }
+        </button>
       </div>
-      }
     </div>
   </div>
   }

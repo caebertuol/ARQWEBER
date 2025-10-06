@@ -12,7 +12,7 @@ module.exports = {
       },
       fontFamily: {
         'playfair': ['"Playfair Display SC"', 'serif'],
-        'raleway': ['Raleway', 'sans-serif'],
+        'raleway': ['Lato', 'sans-serif'],
       }
     },
   },
