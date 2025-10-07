@@ -1,6 +1,6 @@
 // Adicione 'inject' e 'PLATFORM_ID' se ainda não estiverem
 import { Component, HostListener, ElementRef, inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common'; // Adicione isPlatformBrowser
+import { CommonModule, isPlatformBrowser } from '@angular/common'; 
 import { RouterModule } from '@angular/router';
 import { AuthService, User } from '../../services/auth.service';
 import { Observable } from 'rxjs';

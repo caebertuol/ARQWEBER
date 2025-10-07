@@ -15,8 +15,8 @@
 
       @if (currentUser$ | async; as user) {
         <div class="flex items-center space-x-4">
-          <span class="text-gray-700 dark:text-gray-200">Olá, {{ user.name }}</span>
-          <button (click)="logout()" class="text-primary dark:text-secondary hover:underline font-medium">Sair</button>
+          <span class="font-playfair text-gray-700 dark:text-gray-200">Olá, {{ user.name }}</span>
+          <button (click)="logout()" class="font-playfair text-primary dark:text-primary hover:underline font-medium">Sair</button>
         </div>
       } @else {
         <div class="flex items-center">
