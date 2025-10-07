@@ -7,7 +7,8 @@ import { allIcons } from 'angular-feather/icons';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withInMemoryScrolling({
-      anchorScrolling: 'enabled' // Habilita a rolagem para âncoras
+      anchorScrolling: 'enabled', // Habilita a rolagem para âncoras
+      scrollPositionRestoration: 'top' 
     })),
 
     importProvidersFrom(FeatherModule.pick(allIcons))

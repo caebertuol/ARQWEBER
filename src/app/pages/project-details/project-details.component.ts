@@ -33,71 +33,72 @@ export class ProjectDetailsComponent implements OnInit {
   // IMPORTANTE: Esta é uma cópia **temporária** da lista de projetos.
   // Em uma aplicação real, será através de um serviço/API.
   allProjects: Project[] = [
-    {
+   {
       id: 1,
-      title: 'Residência Urbana',
-      location: 'São Paulo - 2023',
-      imageUrl: 'http://static.photos/indoor/640x360/2',
+      title: 'Residencia Urbana',
+      location: 'Ilheus - 2025',
+      imageUrl: 'https://static.photos/indoor/640x360/166.webp',
       fullDescription: 'Um projeto residencial moderno que otimiza o espaço urbano com design minimalista e funcionalidade. Foco em iluminação natural e áreas de convivência integradas.',
-      client: 'Família Silva',
-      year: 2023,
+      client: 'Família Veloso',
+      year: 2025,
       category: 'residencial',
-      images: ['http://static.photos/indoor/640x360/2', 'https://picsum.photos/id/1025/800/600', 'https://picsum.photos/id/1018/800/600']
+      images: ['https://static.photos/indoor/640x360/166.webp', 'https://static.photos/estate/640x360/187.webp', 'https://static.photos/estate/640x360/193.webp']
     },
     {
       id: 2,
-      title: 'Escritório Criativo',
-      location: 'Rio de Janeiro - 2022',
-      imageUrl: 'http://static.photos/office/640x360/3',
-      fullDescription: 'Reforma de um escritório corporativo para uma startup de tecnologia, criando um ambiente colaborativo e inspirador. Uso de cores vibrantes e mobiliário flexível.',
-      client: 'Tech Solutions S.A.',
-      year: 2022,
-      category: 'comercial',
-      images: ['http://static.photos/office/640x360/3', 'https://picsum.photos/id/1063/800/600', 'https://picsum.photos/id/1065/800/600']
+      title: 'Expografia',
+      location: 'Salvador - 2024',
+      imageUrl: 'https://static.photos/indoor/640x360/106.webp',
+      fullDescription: '',
+      client: 'MUNCAB',
+      year: 2024,
+      category: 'institucional',
+      images: ['https://static.photos/indoor/640x360/106.webp', 'https://static.photos/minimal/640x360/192.webp', 'https://static.photos/minimal/640x360/165.webp']
     },
     {
       id: 3,
-      title: 'Restaurante Sabor',
-      location: 'Belo Horizonte - 2021',
-      imageUrl: 'http://static.photos/restaurant/640x360/4',
+      title: 'Cozinha Residencial',
+      location: 'Belo Horizonte - 2023',
+      imageUrl: 'https://static.photos/indoor/640x360/172.webp',
       fullDescription: 'Design de interiores para um restaurante contemporâneo, combinando elementos rústicos e modernos. Iluminação estratégica para criar um ambiente acolhedor e sofisticado.',
-      client: 'Sabor Gourmet Ltda.',
-      year: 2021,
-      category: 'comercial',
-      images: ['http://static.photos/restaurant/640x360/4', 'https://picsum.photos/id/1083/800/600', 'https://picsum.photos/id/1084/800/600']
+      client: 'Cheff  Paola Carossela',
+      year: 2023,
+      category: 'residencial',
+      images: ['https://static.photos/indoor/640x360/172.webp', 'https://static.photos/indoor/640x360/151.webp', 'https://static.photos/indoor/640x360/102.webp']
     },
+    // Novos projetos que serão mostrados ao clicar em "Ver todos"
     {
       id: 4,
-      title: 'Clínica Odontológica',
-      location: 'São Paulo - 2022',
-      imageUrl: 'https://picsum.photos/id/20/640/360',
-      fullDescription: 'Projeto de interior para clínica odontológica com foco em conforto do paciente e ambiente clean. Design funcional e uso de materiais de fácil higienização.',
-      client: 'Dra. Ana Paula',
+      title: 'Biblioteca Residencial',
+      location: 'Salvador - 2022',
+      imageUrl: 'https://static.photos/indoor/640x360/142.webp',
+      fullDescription: 'Projeto de interior com conceito moderno e convidativo. Espaços para descanço, com design que remete intelectualidade e tranquilidade.',
+      client: 'Dra. Odete Roitmamm',
       year: 2022,
       category: 'institucional',
-      images: ['https://picsum.photos/id/20/640/360', 'https://picsum.photos/id/21/800/600', 'https://picsum.photos/id/22/800/600']
+      images: ['https://static.photos/indoor/640x360/142.webp', 'https://static.photos/indoor/640x360/104.webp', 'https://static.photos/textures/640x360/143.webp']
     },
     {
       id: 5,
       title: 'Apartamento Compacto',
-      location: 'Curitiba - 2023',
-      imageUrl: 'https://picsum.photos/id/25/640/360',
+      location: 'Porto Alegre - 2021',
+      imageUrl: 'https://static.photos/indoor/640x360/144.webp',
       fullDescription: 'Solução inteligente para apartamento compacto, maximizando o espaço e a funcionalidade. Móveis planejados e design multifuncional.',
-      client: 'Sr. João Silva',
-      year: 2023,
+      client: 'Srta. Cris Silva',
+      year: 2021,
       category: 'residencial',
-      images: ['https://picsum.photos/id/25/640/360', 'https://picsum.photos/id/26/800/600', 'https://picsum.photos/id/27/800/600']
+      images: ['https://static.photos/indoor/640x360/144.webp', 'https://static.photos/workspace/640x360/170.webp', 'https://static.photos/workspace/640x360/182.webp']
     },
     {
       id: 6,
-      title: 'Livraria Conceitual',
-      location: 'Porto Alegre - 2021',
-      imageUrl: 'https://picsum.photos/id/28/640/360',
-      fullDescription: 'Criação de ambiente para livraria com conceito moderno e convidativo. Espaços para leitura e eventos, com design que remete ao conhecimento e tranquilidade.',
-      client: 'Livraria Saberes',
+      title: 'Residência Moderna',
+      location: 'Fortaleza - 2021',
+      imageUrl: 'https://static.photos/indoor/640x360/194.webp',
+      fullDescription: 'Criação de ambiente com conceito moderno e convidativo. Espaços para descanço, com design que remete a tranquilidade.',
+      client: 'Dra. Carla Perez',
       year: 2021,
-      category: 'comercial',
-      images: ['https://picsum.photos/id/28/640/360', 'https://picsum.photos/id/29/800/600', 'https://picsum.photos/id/30/800/600']
+      category: 'residencial',
+       images: ['https://static.photos/indoor/640x360/194.webp', 'https://static.photos/indoor/640x360/159.webp', 'https://static.photos/indoor/640x360/192.webp']
     }
   ];
 

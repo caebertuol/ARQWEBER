@@ -4,27 +4,21 @@
     <div class="flex flex-col md:flex-row justify-between items-center pb-8">
       <div class="flex flex-wrap justify-center space-x-6 mb-6 md:mb-0">
         @for (link of navLinks; track link.path) {
-          <a [href]="link.path" class="hover:text-white transition-colors">{{ link.label }}</a>
+        <a [href]="link.path" class="uppercase tracking-wider hover:text-white transition-colors">{{ link.label }}</a>
         }
       </div>
 
       <div class="flex space-x-6">
-        <a href="https://www.instagram.com/teweber/" 
-           target="_blank" rel="noopener noreferrer" 
-           class="hover:text-white transition-colors"
-           aria-label="Perfil no Instagram">
+        <a href="https://www.instagram.com/teweber/" target="_blank" rel="noopener noreferrer"
+          class="hover:text-white transition-colors" aria-label="Perfil no Instagram">
           <i-feather name="instagram"></i-feather>
         </a>
-        <a href="https://www.linkedin.com/in/estef%C3%A2niaweber/" 
-           target="_blank" rel="noopener noreferrer" 
-           class="hover:text-white transition-colors"
-           aria-label="Perfil no LinkedIn">
-          <i-feather name="linkedin"></i-feather>
+        <a href="https://www.linkedin.com/in/estef%C3%A2niaweber/" target="_blank" rel="noopener noreferrer"
+          class="hover:text-white transition-colors" aria-label="Perfil no LinkedIn">
+          <i-feather name="linkedin" ></i-feather>
         </a>
-        <a href="https://www.facebook.com/estefaniaweber" 
-           target="_blank" rel="noopener noreferrer" 
-           class="hover:text-white transition-colors"
-           aria-label="Página no Facebook">
+        <a href="https://www.facebook.com/estefaniaweber" target="_blank" rel="noopener noreferrer"
+          class="hover:text-white transition-colors" aria-label="Perfil no Facebook">
           <i-feather name="facebook"></i-feather>
         </a>
       </div>
