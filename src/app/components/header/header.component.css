@@ -1,14 +1,51 @@
-/* Estilo para o link que tiver a classe 'active-link' */
-.nav-link.active-link {
-  color: var(--color-primary); /* Define a cor primária para o texto */
+/* src/app/components/header/header.component.css */
+
+.nav-link {
+  position: relative; /* Necessário para posicionar a linha */
+  padding-bottom: 4px; /* Cria um pequeno espaço para a linha abaixo do texto */
 }
 
-/* Mostra o sublinhado animado quando o link está ativo */
+/* Esta é a linha que ficará sob o texto */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px; /* Espessura da linha */
+  background-color: currentColor; /* Usa a cor atual do texto */
+  
+  transform: scaleX(0); /* Começa "escondida" com largura 0 */
+  transform-origin: center; /* A animação vai começar do centro */
+  transition: transform 0.3s ease-out; /* A transição suave */
+}
+
+/* Quando o mouse passa sobre o link, a linha "cresce" */
+.nav-link:hover::after {
+  transform: scaleX(1); /* Vai para a largura total */
+}
+
+/* Também podemos adicionar uma mudança de cor no hover do texto */
+.nav-link:hover {
+  /* No modo claro, o hover fica com a cor primária */
+  color: #A0522D; /* Substitua pela sua cor primária se for diferente */
+}
+
+/* Estilo para o link que está ativo (seção atual) */
+.nav-link.active-link {
+  color: #A0522D; /* Define a cor primária para o texto ativo */
+}
+
+/* Faz o sublinhado aparecer quando o link está ativo */
 .nav-link.active-link::after {
   transform: scaleX(1);
 }
 
-/* Versão para o tema escuro */
+/* Versões para o tema escuro */
+.dark .nav-link:hover {
+  color: white;
+}
+
 .dark .nav-link.active-link {
   color: white;
 }

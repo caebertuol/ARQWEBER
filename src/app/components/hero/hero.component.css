@@ -3,7 +3,17 @@
   overflow: hidden;
   /* Garante que nada vaze para fora */
 }
-
+/* hero.component.css */
+.hero-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px; /* Altura do gradiente */
+  z-index: 2; /* Fica entre o conteúdo e o fundo */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
 /* O container das imagens do carrossel */
 .carousel-images {
   position: absolute;

@@ -20,7 +20,7 @@
         </div>
       } @else {
         <div class="flex items-center">
-          <a routerLink="/login" class="font-playfair text-primary dark:text-primary hover:underline font-medium">Login</a>
+          <a routerLink="/login" class="nav-link uppercase font-playfair text-gray-600 dark:text-gray-300 transition-colors">Login</a>
         </div>
       }
       
@@ -44,39 +44,5 @@
   </div>
 
   @if (isMobileMenuOpen) {
-    <div class="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        @for (link of navLinks; track link.path) {
-          <a [href]="link.path" (click)="toggleMobileMenu()"
-             class="uppercase block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700"
-             [ngClass]="{ 'text-primary dark:text-white bg-gray-100 dark:bg-gray-700': activeSection === link.id }">
-             {{ link.label }}
-          </a>
-        }
-      </div>
-      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-        <div class="px-5 flex items-center justify-between">
-          @if (currentUser$ | async; as user) {
-            <div class="flex items-center">
-              <span class="font-medium text-gray-800 dark:text-gray-200">Olá, {{ user.name }}</span>
-            </div>
-            <button (click)="logout()"
-              class="text-primary dark:text-secondary hover:underline font-medium ml-4">Sair</button>
-          } @else {
-            <a routerLink="/login" (click)="toggleMobileMenu()"
-              class="block w-full text-left text-base font-medium text-primary dark:text-secondary">Login</a>
-          }
-
-          <button (click)="toggleTheme()"
-            class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
-            @if ((currentTheme$ | async) === 'light') {
-              <i-feather name="moon"></i-feather>
-            } @else {
-              <i-feather name="sun"></i-feather>
-            }
-          </button>
-        </div>
-      </div>
-    </div>
-  }
+    }
 </nav>
