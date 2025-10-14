@@ -22,8 +22,8 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required], // 1. ADICIONE O CAMPO AQUI
       password: ['', [Validators.required, Validators.minLength(6)]],
-
       lgpdConsent: [false, Validators.requiredTrue]
     });
   }
@@ -35,8 +35,8 @@ export class RegisterComponent {
     }
 
 
-    const { name, email, password } = this.registerForm.value;
-    const success = this.authService.register(name, email, password);
+    const { name, email, password, telefone } = this.registerForm.value;
+    const success = this.authService.register(name, email, password, telefone);
 
     if (success) {
       this.router.navigate(['/login']);

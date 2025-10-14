@@ -1,0 +1,55 @@
+<div class="container mx-auto px-6 py-20 pt-32">
+  <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-primary dark:text-white mb-6">Editar Perfil</h1>
+
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Nome Completo</label>
+        <input type="text" id="name" formControlName="name" class="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+        @if (editProfileForm.get('name')?.invalid && editProfileForm.get('name')?.touched) {
+          <p class="text-red-500 text-sm mt-1">O nome é obrigatório.</p>
+        }
+      </div>
+
+      <div class="mb-6">
+        <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">E-mail (não pode ser alterado)</label>
+        <input type="email" id="email" formControlName="email" class="w-full px-4 py-2 border rounded-md bg-gray-100 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-700 cursor-not-allowed">
+      </div>
+
+      <div class="border-t border-gray-200 dark:border-gray-700 my-6"></div>
+
+      <h2 class="text-xl font-bold text-primary dark:text-white mb-4">Alterar Senha (opcional)</h2>
+
+      <div class="mb-4">
+        <label for="newPassword" class="block text-gray-700 dark:text-gray-300 mb-2">Nova Senha</label>
+        <input type="password" id="newPassword" formControlName="newPassword" class="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+        @if (editProfileForm.get('newPassword')?.errors?.['minlength']) {
+          <p class="text-red-500 text-sm mt-1">A senha deve ter no mínimo 6 caracteres.</p>
+        }
+      </div>
+
+      <div class="mb-6">
+        <label for="confirmPassword" class="block text-gray-700 dark:text-gray-300 mb-2">Confirme a Nova Senha</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="w-full px-4 py-2 border rounded-md dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+        @if (editProfileForm.errors?.['passwordMismatch'] && editProfileForm.get('confirmPassword')?.touched) {
+          <p class="text-red-500 text-sm mt-1">As senhas não coincidem.</p>
+        }
+      </div>
+
+      <div class="flex items-center justify-end space-x-4 mt-8">
+        <a routerLink="/dashboard" class="text-gray-600 dark:text-gray-300 font-medium hover:underline">Cancelar</a>
+        <button 
+          type="submit" 
+          [disabled]="isSubmitting"
+          class="bg-primary text-white font-bold px-6 py-2 rounded-md transition duration-300 flex items-center"
+          [ngClass]="{ 'hover:bg-opacity-80': !isSubmitting, 'opacity-50 cursor-not-allowed': isSubmitting }">
+          @if (isSubmitting) {
+            <span>Salvando...</span>
+          } @else {
+            <span>Salvar Alterações</span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

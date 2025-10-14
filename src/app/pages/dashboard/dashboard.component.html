@@ -1,0 +1,161 @@
+<div class="container mx-auto px-6 py-20 pt-32">
+
+  <div class="flex flex-col md:flex-row justify-between md:items-center mb-12">
+    <div>
+      @if (user) {
+      <h1 class="text-4xl font-bold text-primary dark:text-white">Seu Painel, {{ user.name }}</h1>
+      <p class="mt-2 text-lg text-gray-700 dark:text-gray-300">Acompanhe aqui o histórico de suas solicitações.</p>
+      }
+    </div>
+    <div class="mt-6 md:mt-0 w-full md:w-auto">
+      <a routerLink="/" fragment="servicos"
+        class="bg-primary hover:bg-opacity-80 text-white font-bold px-6 py-3 rounded-md transition duration-300 flex items-center justify-center w-full">
+        <i-feather name="plus-circle" class="mr-2"></i-feather>
+        <span>Nova Solicitação</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <div class="lg:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-primary dark:text-white">Meu Perfil</h3>
+          <a routerLink="/editar-perfil"
+            class="text-gray-400 hover:text-primary dark:hover:text-white transition-colors">
+            <i-feather name="edit-3" class="w-5 h-5"></i-feather>
+          </a>
+        </div>
+
+        @if (user) {
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <i-feather name="user" class="w-4 h-4 mr-2 text-gray-500"></i-feather>
+            <span class="text-gray-700 dark:text-gray-300">{{ user.name }}</span>
+          </div>
+          <div class="flex items-center">
+            <i-feather name="mail" class="w-4 h-4 mr-2 text-gray-500"></i-feather>
+            <span class="text-gray-700 dark:text-gray-300">{{ user.email }}</span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex items-center">
+        <div class="bg-blue-100 dark:bg-blue-900/50 p-3 rounded-full mr-4"><i-feather name="file-text"
+            class="text-blue-500"></i-feather></div>
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Total de Solicitações</p>
+          <p class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">{{ totalRequests }}</p>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex items-center">
+        <div class="bg-green-100 dark:bg-green-900/50 p-3 rounded-full mr-4"><i-feather name="dollar-sign"
+            class="text-green-500"></i-feather></div>
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Valor Total Orçado</p>
+          <p class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">{{ totalValue | currency:'BRL' }}</p>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex items-center">
+        <div class="bg-yellow-100 dark:bg-yellow-900/50 p-3 rounded-full mr-4"><i-feather name="activity"
+            class="text-yellow-500"></i-feather></div>
+        <div>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Status do Último Pedido</p>
+          <p class="text-xl md:text-2xl font-bold text-gray-800 dark:text-white">{{ lastRequestStatus }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-12">
+    <h2 class="text-3xl font-bold text-primary dark:text-white border-b-2 border-secondary pb-2 mb-6">Histórico de
+      Solicitações</h2>
+
+    @if (quoteHistory.length === 0) {
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md text-center flex flex-col items-center"
+      [@listAnimation]>
+      <i-feather name="file-text" class="w-24 h-24 text-gray-200 dark:text-gray-700"></i-feather>
+      <p class="text-gray-600 dark:text-gray-400 mt-4 text-lg">Nenhuma solicitação encontrada.</p>
+      <p class="text-gray-500 dark:text-gray-500 text-sm">Parece que você ainda não montou nenhum orçamento.</p>
+      <a routerLink="/" fragment="servicos"
+        class="mt-4 inline-block text-primary dark:text-secondary font-bold hover:underline">Solicitar serviço agora</a>
+    </div>
+    } @else {
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      @for (quote of quoteHistory; track $index) {
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col" [@listAnimation]>
+        <div class="flex flex-col sm:flex-row justify-between sm:items-start">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Solicitação de {{ quote.date | date:'dd/MM/yyyy'
+              }}</h3>
+            <p class="text-lg font-bold text-primary dark:text-secondary mt-1">{{ quote.totalPrice | currency:'BRL' }}
+            </p>
+          </div>
+          <span class="text-xs font-bold uppercase px-3 py-1 rounded-full mt-2 sm:mt-0" [ngClass]="{
+                      'bg-gray-200 text-gray-800': quote.status === 'Enviado',
+                      'bg-yellow-200 text-yellow-800': quote.status === 'Em Análise',
+                      'bg-green-200 text-green-800': quote.status === 'Aprovado',
+                      'bg-blue-200 text-blue-800': quote.status === 'Concluído'
+                    }">
+            {{ quote.status }}
+          </span>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+        <div class="flex-grow">
+          <p class="font-semibold text-gray-700 dark:text-gray-200 mb-2">Serviços:</p>
+          <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 mb-6">
+            @for (service of quote.services; track service.title) { <li>{{ service.title }}</li> }
+          </ul>
+        </div>
+        <div class="flex items-center space-x-4 mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+          <a href="#" (click)="sendQuoteToWhatsApp(quote); $event.preventDefault()"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md flex items-center transition-colors text-sm"><i-feather
+              name="message-circle" class="w-4 h-4 mr-2"></i-feather>Falar com Arquiteta</a>
+          <button (click)="deleteQuote(quote)"
+            class="text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium text-sm flex items-center"><i-feather
+              name="trash-2" class="w-4 h-4 mr-1"></i-feather>Excluir</button>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
+
+@if (showDeleteConfirm) {
+<div class="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 m-4 max-w-sm w-full z-50">
+    <div class="flex items-start">
+      <div
+        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+        <i-feather name="alert-triangle" class="h-6 w-6 text-red-600"></i-feather>
+      </div>
+      <div class="ml-4 text-left">
+        <h3 class="text-lg leading-6 font-bold text-gray-900 dark:text-white">
+          Excluir Solicitação
+        </h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Você tem certeza de que deseja excluir esta solicitação? Esta ação não pode ser desfeita.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+      <button (click)="confirmDeletion()" type="button"
+        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
+        Confirmar Exclusão
+      </button>
+      <button (click)="cancelDeletion()" type="button"
+        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:w-auto sm:text-sm">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+}
