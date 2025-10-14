@@ -29,11 +29,13 @@ export class EditProfileComponent {
 
   editProfileForm: FormGroup;
   isSubmitting = false;
+  showChangePassword = false; // Propriedade para controlar a seção de senha
 
   constructor() {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.required],
       email: [{ value: '', disabled: true }], // O e-mail não pode ser editado
+      telefone: ['', Validators.required],
       newPassword: ['', [Validators.minLength(6)]],
       confirmPassword: ['']
     }, { validators: passwordMatchValidator }); // Aplica o validador de senha ao formulário inteiro
@@ -45,8 +47,25 @@ export class EditProfileComponent {
     if (currentUser) {
       this.editProfileForm.patchValue({
         name: currentUser.name,
-        email: currentUser.email
+        email: currentUser.email,
+        telefone: currentUser.telefone // Preenche o campo de telefone
       });
+    }
+  }
+  
+  // Função para mostrar/esconder a seção de senha
+  toggleChangePassword(): void {
+    this.showChangePassword = !this.showChangePassword;
+    // Se estivermos escondendo, limpa e remove validadores dos campos de senha
+    if (!this.showChangePassword) {
+      this.editProfileForm.get('newPassword')?.reset('');
+      this.editProfileForm.get('confirmPassword')?.reset('');
+      this.editProfileForm.get('newPassword')?.clearValidators();
+      this.editProfileForm.get('newPassword')?.updateValueAndValidity();
+    } else {
+      // Se estivermos mostrando, readiciona o validador
+      this.editProfileForm.get('newPassword')?.setValidators([Validators.minLength(6)]);
+      this.editProfileForm.get('newPassword')?.updateValueAndValidity();
     }
   }
 
@@ -57,10 +76,11 @@ export class EditProfileComponent {
     }
 
     this.isSubmitting = true;
-    const { name, newPassword } = this.editProfileForm.value;
+    // Extrai todos os valores necessários do formulário
+    const { name, telefone, newPassword } = this.editProfileForm.value;
 
-    // Chama o método de atualização do serviço
-    const success = this.authService.updateUser(name, newPassword || undefined);
+    // Chama o método de atualização do serviço com todos os argumentos
+    const success = this.authService.updateUser(name, telefone, newPassword || undefined);
 
     if (success) {
       this.notificationService.show('Perfil atualizado com sucesso!');

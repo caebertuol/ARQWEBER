@@ -1,4 +1,3 @@
-// src/app/pages/home/home.component.ts
 import { Component } from '@angular/core';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { AboutComponent } from '../../components/about/about.component';

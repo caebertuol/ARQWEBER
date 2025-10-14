@@ -1,6 +1,9 @@
 .bg-image-register {
   /* Escolha uma imagem que represente seu trabalho */
-  background-image: url('https://images.pexels.com/photos/135018/pexels-photo-135018.jpeg?_gl=1*k9g1l3*_ga*MjgwMjUwMzY2LjE3NTU3OTkwNzg.*_ga_8JE65Q40S6*czE3NTk4NTg1NTMkbzQkZzEkdDE3NTk4NTg5NjgkajYwJGwwJGgw');
+  background-image: url('https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?_gl=1*17nwh2c*_ga*Nzk1MTA4NDAwLjE3NTcxMTc1Njg.*_ga_8JE65Q40S6*czE3NjA0NzM4ODQkbzMkZzEkdDE3NjA0NzQyMjMkajE4JGwwJGgw');
   background-size: cover;
   background-position: center;
 }
+
+/*   background-image: url('https://images.pexels.com/photos/135018/pexels-photo-135018.jpeg?_gl=1*k9g1l3*_ga*MjgwMjUwMzY2LjE3NTU3OTkwNzg.*_ga_8JE65Q40S6*czE3NTk4NTg1NTMkbzQkZzEkdDE3NTk4NTg5NjgkajYwJGwwJGgw');
+ */

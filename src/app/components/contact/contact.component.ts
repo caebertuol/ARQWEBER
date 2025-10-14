@@ -36,7 +36,7 @@ export class ContactComponent {
     }
 
     this.isSubmitting = true;
-    // SUBSTITUA a URL abaixo pela URL que você copiou do Formspree
+    //  URL Formspree
     const formspreeEndpoint = 'https://formspree.io/f/xeorploq'; 
 
     this.http.post(formspreeEndpoint, this.contactForm.value, { headers: { 'Accept': 'application/json' } })

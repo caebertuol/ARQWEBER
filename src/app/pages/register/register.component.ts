@@ -22,7 +22,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required], // 1. ADICIONE O CAMPO AQUI
+      telefone: ['', Validators.required], 
       password: ['', [Validators.required, Validators.minLength(6)]],
       lgpdConsent: [false, Validators.requiredTrue]
     });

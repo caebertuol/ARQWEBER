@@ -1,5 +1,3 @@
-// src/app/services/auth.service.ts
-
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
@@ -118,26 +116,23 @@ export class AuthService {
       }
     }
   }
-  updateUser(newName: string, newPassword?: string): boolean {
+   updateUser(newName: string, newTelefone: string, newPassword?: string): boolean {
     if (isPlatformBrowser(this.platformId) && this.currentUserValue) {
       const email = this.currentUserValue.email;
       const storedData = localStorage.getItem(email);
       if (storedData) {
         const data = JSON.parse(storedData);
-
-        // Atualiza o nome
+        
+        // Atualiza o nome e o telefone
         data.user.name = newName;
+        data.user.telefone = newTelefone;
 
-        // Se uma nova senha foi fornecida, atualiza a senha
         if (newPassword) {
           data.password = newPassword;
         }
 
-        // Salva os dados atualizados de volta no localStorage
         localStorage.setItem(email, JSON.stringify(data));
-        // Atualiza também o 'currentUser' que guarda apenas nome e e-mail
         localStorage.setItem('currentUser', JSON.stringify(data.user));
-        // Notifica toda a aplicação sobre a mudança no nome do usuário
         this.currentUserSubject.next(data.user);
 
         return true;

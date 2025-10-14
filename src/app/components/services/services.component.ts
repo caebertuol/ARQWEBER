@@ -80,7 +80,6 @@ export class ServicesComponent {
     this.quoteService.toggleService(service);
   }
 
-  // FUNÇÃO 'proceedToQuote' TOTALMENTE ATUALIZADA
   proceedToQuote(): void {
     if (this.isProcessing) return; // Bloqueia cliques múltiplos
     this.isProcessing = true; // Ativa o bloqueio

@@ -1,104 +1,89 @@
 <nav class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
   <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a routerLink="/" (click)="isMobileMenuOpen = false" class="text-3xl font-bold text-primary dark:text-primary">ARQ
-      WEBER</a>
+    <a routerLink="/" (click)="isMobileMenuOpen = false" class="text-3xl font-bold text-primary dark:text-primary">ARQ WEBER</a>
 
     <div class="hidden lg:flex items-center space-x-6">
       @for(link of navLinks; track link.path) {
-      <a [href]="link.path" class="nav-link uppercase font-playfair text-gray-600 dark:text-gray-300 transition-colors"
-        [ngClass]="{ 'active-link': activeSection === link.id }">
-        {{ link.label }}
-      </a>
+        <a [href]="link.path" class="nav-link uppercase font-playfair text-gray-600 dark:text-gray-300 transition-colors"
+           [ngClass]="{ 'active-link': activeSection === link.id }">
+           {{ link.label }}
+        </a>
       }
 
       <div class="border-l border-gray-300 dark:border-gray-600 h-6"></div>
 
       @if (currentUser$ | async; as user) {
-      <div class="flex items-center space-x-4">
-        <a routerLink="/dashboard"
-          class="font-playfair text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-white transition-colors">Olá,
-          {{ user.name }}</a>
-        <button (click)="logout()"
-          class="font-playfair text-primary dark:text-primary hover:underline font-medium">Sair</button>
-      </div>
+        <div class="flex items-center space-x-4">
+          <a routerLink="/dashboard"
+             class="font-playfair text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-white transition-colors">Olá,
+             {{ user.name }}</a>
+          <button (click)="logout()"
+            class="font-playfair text-primary dark:text-primary hover:underline font-medium">Sair</button>
+        </div>
       } @else {
-      <div class="flex items-center">
-        <a routerLink="/login"
-          class="nav-link uppercase font-playfair text-gray-600 dark:text-gray-300 transition-colors">Login</a>
-      </div>
+        <div class="flex items-center">
+          <a routerLink="/login"
+            class="nav-link uppercase font-playfair text-gray-600 dark:text-gray-300 transition-colors">Login</a>
+        </div>
       }
 
       <button (click)="toggleTheme()"
-        class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+        class="mt-1 p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
         @if ((currentTheme$ | async) === 'light') {
-        <i-feather name="moon"></i-feather>
+          <i-feather name="moon"></i-feather>
         } @else {
-        <i-feather name="sun"></i-feather>
+          <i-feather name="sun"></i-feather>
         }
       </button>
     </div>
 
-    <button (click)="toggleMobileMenu()" class="lg:hidden focus:outline-none text-primary dark:text-white">
+    <button (click)="toggleMobileMenu()" class="lg:hidden rounded-full focus:outline-none text-primary dark:text-white">
       @if (isMobileMenuOpen) {
-      <i-feather name="x" class="w-6 h-6"></i-feather>
+        <i-feather name="x" class="w-6 h-6"></i-feather>
       } @else {
-      <i-feather name="menu" class="w-6 h-6"></i-feather>
+        <i-feather name="menu" class="w-6 h-6"></i-feather>
       }
     </button>
   </div>
 
   @if (isMobileMenuOpen) {
-  <div class="lg:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-      @for (link of navLinks; track link.path) {
-      <a [href]="link.path" (click)="toggleMobileMenu()"
-        class="uppercase block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700"
-        [ngClass]="{ 'text-primary dark:text-white bg-gray-100 dark:bg-gray-700': activeSection === link.id }">
-        {{ link.label }}
-      </a>
-      }
-    </div>
+    <div class="lg:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        @for (link of navLinks; track link.path) {
+          <a [href]="link.path" (click)="toggleMobileMenu()"
+             class="uppercase font-playfair block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700"
+             [ngClass]="{ 'text-primary dark:text-white bg-gray-100 dark:bg-gray-700': activeSection === link.id }">
+             {{ link.label }}
+          </a>
+        }
+      </div>
 
-    <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700 px-4">
-      @if (currentUser$ | async; as user) {
-      <div class="space-y-1">
-        <div class="px-3 flex justify-between items-center">
-          <span class="font-medium text-gray-800 dark:text-gray-200">Olá, {{ user.name }}</span>
-          <button (click)="toggleTheme()"
-            class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
-            @if ((currentTheme$ | async) === 'light') {
-            <i-feather name="moon"></i-feather>
-            } @else {
-            <i-feather name="sun"></i-feather>
-            }
-          </button>
-        </div>
-        <a routerLink="/dashboard" (click)="toggleMobileMenu()"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700">
-          Meu Painel
-        </a>
-        <button (click)="logout()"
-          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-700">
-          Sair
-        </button>
-      </div>
-      } @else {
-      <div class="flex items-center justify-between">
-        <a routerLink="/login" (click)="toggleMobileMenu()"
-          class="flex-1 text-center text-base font-medium bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors">
-          Login
-        </a>
-        <button (click)="toggleTheme()"
-          class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 ml-4">
-          @if ((currentTheme$ | async) === 'light') {
-          <i-feather name="moon"></i-feather>
+      <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+        <div class="px-5 flex items-center justify-between">
+          @if (currentUser$ | async; as user) {
+            <!-- Layout para usuário logado -->
+            <div class="flex items-center">
+              <a routerLink="/dashboard" (click)="toggleMobileMenu()" class="font-playfair font-medium text-gray-800 dark:text-gray-200 hover:text-primary dark:hover:text-white">Olá, {{ user.name }}</a>
+            </div>
+            <!-- AJUSTE: Botão Sair agora vem ANTES do botão de tema -->
+            <div class="flex items-center space-x-2">
+              <button (click)="logout()" class="font-playfair text-primary dark:text-secondary hover:underline font-medium">Sair</button>
+              <button (click)="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+                @if ((currentTheme$ | async) === 'light') { <i-feather name="moon"></i-feather> } @else { <i-feather name="sun"></i-feather> }
+              </button>
+            </div>
           } @else {
-          <i-feather name="sun"></i-feather>
+            <!-- Layout para visitante (não logado) -->
+            <a routerLink="/login" (click)="toggleMobileMenu()"
+               class="font-playfair text-base font-medium text-gray-700 border-b dark:text-gray-200 hover:text-primary dark:hover:text-white">
+               Login
+            </a>
+            <button (click)="toggleTheme()" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+              @if ((currentTheme$ | async) === 'light') { <i-feather name="moon"></i-feather> } @else { <i-feather name="sun"></i-feather> }
+            </button>
           }
-        </button>
+        </div>
       </div>
-      }
     </div>
-  </div>
   }
 </nav>
